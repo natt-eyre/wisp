@@ -1,11 +1,9 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
-  devise :omniauthable, :omniauth_providers => [:vkontakte]
+  devise :rememberable, :omniauthable, :omniauth_providers => [:vkontakte]
 
-  def from_omniauth(data)
-    
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create!
   end
 end
