@@ -6,6 +6,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     if @user.persisted?
       sign_in_and_redirect @user, :event => :authentication #this will throw if @user is not activated
+      @user.token = request.env["omniauth.auth"].credentials.token
+      @user.save!
       set_flash_message(:notice, :success, :kind => "vkontakte") if is_navigational_format?
     else
       session["devise.vkontakte_data"] = request.env["omniauth.auth"]
