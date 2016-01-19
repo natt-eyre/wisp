@@ -1,0 +1,7 @@
+<li>
+  <% if photo_attachment = wall_record.attachments&.find {|r| r.type == "photo"}  %>
+    <%= image_tag photo_attachment.photo.src_xbig %>
+  <% else %>
+    no photo :(
+  <% end %>
+</li>

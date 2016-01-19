@@ -1,6 +1,6 @@
-<div>
-<%= @wall %>
-</div>
+<ul>
+<%= render partial: "wall_record", collection: @records %>
+</ul>
 <div>
   <%= link_to "Sign out", destroy_user_session_path %>
 </div>
